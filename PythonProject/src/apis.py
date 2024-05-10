@@ -86,7 +86,7 @@ class OpenWeatherAPI:
             return None
 
 
-class ReservamosAPI:
+class CitiesAPI:
     def __init__(self) -> None:
         self._base_url: str = env.get_env('api_cities')
         self.headers = {

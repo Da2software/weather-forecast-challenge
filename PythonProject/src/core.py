@@ -1,4 +1,4 @@
-from src.apis import OpenWeatherAPI, ReservamosAPI, CityWeathers
+from src.apis import OpenWeatherAPI, CitiesAPI, CityWeathers
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 class WeatherCore:
     def __init__(self):
         self._weather_api = OpenWeatherAPI()
-        self._reservamosA_api = ReservamosAPI()
+        self._citiesA_api = CitiesAPI()
 
     async def fetch_weather(self, city):
         loop = asyncio.get_event_loop()
@@ -16,7 +16,7 @@ class WeatherCore:
         return weathers
 
     async def get_7days(self, city_name: str):
-        cities = self._reservamosA_api.get_cities(city_name)
+        cities = self._citiesA_api.get_cities(city_name)
         reqs = [self.fetch_weather(city) for city in cities]
         results = await asyncio.gather(*reqs)
         json_res = []
