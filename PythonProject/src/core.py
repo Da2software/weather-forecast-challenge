@@ -17,6 +17,7 @@ class WeatherCore:
 
     async def get_7days(self, city_name: str):
         cities = self._citiesA_api.get_cities(city_name)
+        cities = filter(lambda item: item and item.type == "city", cities)
         reqs = [self.fetch_weather(city) for city in cities]
         results = await asyncio.gather(*reqs)
         json_res = []

@@ -15,6 +15,7 @@ class City:
         self.country: str = json.get("country", None)
         self.lat: str = json.get("lat", None)
         self.long: str = json.get("long", None)
+        self.type: str = json.get("result_type", "")
 
     def __str__(self):
         return f"({self.id}, {self.display}, {self.state}, {self.country})"
@@ -71,7 +72,8 @@ class OpenWeatherAPI:
             "lat": city.lat,
             "lon": city.long,
             "appid": self._api_key,
-            "exclude": "minutely,hourly,alerts"
+            "exclude": "minutely,hourly,alerts",
+            "units": "metric"
         }
         res = requests.get(self._base_url + "/onecall", params=paramas,
                            headers=self.headers)
