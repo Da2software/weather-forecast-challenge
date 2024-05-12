@@ -9,3 +9,6 @@
 - ```cp env.cfg.template env.cfg``` and edit the environment values in the
   env.cfg
 - ```fastapi dev main.py```
+
+# Endpoint Example
+```http://localhost:8000/weather_days?city_name=mon```
