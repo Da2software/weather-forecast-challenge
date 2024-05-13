@@ -89,9 +89,12 @@ module Apis
             }
             c = CityWeathers.new(nil, nil)
             res = HTTParty.get("#{@base_url}", options=options)
-            if res.code == 200
+            if res and res.code == 200
                 wheaters = JSON.parse(res.body)
-                res = weathers.map { |item| CityWeathers.new(city, item) }
+                if !wheaters
+                    return CityWeathers.new(city, [])
+                end
+                res = wheaters.map { |item| CityWeathers.new(city, item) }
                 return res
             else
                 puts "Error get_forcast: #{res.code}"
